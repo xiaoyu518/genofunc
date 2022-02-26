@@ -33,7 +33,7 @@ def extract_metadata(in_fasta,in_metadata,column_name,column_rename,id_column,ou
 
     output_fasta = get_out_handle(out_fasta)
     log_handle = get_log_handle(log_file)
-    output_metadata = get_out_handle(out_fasta)
+    output_metadata = get_out_handle(out_metadata)
     seq_list = []
 
     if file_check(in_fasta):
