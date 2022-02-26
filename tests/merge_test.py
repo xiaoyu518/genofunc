@@ -14,7 +14,7 @@ data_dir = os.path.join(this_dir, 'tests', 'data')
 class TestMerge(unittest.TestCase):
     def test_run_merge(self):
         in_fasta = ["%s/sequences/seqA.fasta", "%s/sequences/seqB.fasta" %data_dir]
-        in_metadata = ["%s/metadata/metadataA.csv", "%s/metadata/metadataB.csv" %data_dir]
+        in_metadata = ["%s/metadata/metadataA.tsv", "%s/metadata/metadataB.tsv" %data_dir]
         index_field = "strain"
         out_dir = "%s/output/" %data_dir
         log_file = "%s/output/tmp.merge.log" %data_dir
