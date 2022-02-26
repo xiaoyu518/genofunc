@@ -113,7 +113,7 @@ def main(args=None):
         help='Strip gap bases within extracted gene regions.'
     )
     subparser_feature_extractor.add_argument(
-        '--filter-span', dest='filter_span', type=int, metavar='<integer>', required=False, default=0,
+        '--filter-span', dest='filter_span', type=float, metavar='<float>', required=False, default=0,
         help='Minimum gene sequence length to be filtered (Default: 0)'
     )
     subparser_feature_extractor.add_argument(
@@ -144,7 +144,7 @@ def main(args=None):
         help='Which genes fasta files are needed for filtering'
     )
     subparser_filter_fasta.add_argument(
-        '--min-length', dest='min_length', type=int, metavar='<integer>', required=True,
+        '--min-length', dest='min_length', type=float, metavar='<float>', required=True,
         help='Minimum percentage for sequences to be filtered if under this threshold'
     )
     subparser_filter_fasta.add_argument(
