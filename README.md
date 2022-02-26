@@ -34,7 +34,7 @@ Description: Extract relevent metadata based on index fields from metadata file 
         --out-metadata: Output metadata file (Default: extracted_metadata.csv)
         --log-file: Output additional information from the program (default: stdout)
 
-    e.g. genofunc extract_metadata --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --column country --id-column strain --out-fasta tests/data/output/extract.fasta --out-metadata tests/data/output/extract_metadata.csv
+    e.g. genofunc extract_metadata --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.tsv --column country --id-column strain --out-fasta tests/data/output/extract.fasta --out-metadata tests/data/output/extract_metadata.csv
 
 #### filter_fasta
 
@@ -48,7 +48,7 @@ Description: Filter fasta file based on minimum sequence length.
         --symmetric: Require all gene regions to be available for the same sequence (Default: False)
         --out-dir: Output directory after filtering (Default: ./)
 
-    e.g. genofunc filter_fasta --in-dir tests/data/sequences/gene_fasta/ --in-metadata tests/data/metadata/metadataB.csv --genes pol gag --min-length 0.95 --symmetric --out-dir tests/data/output/
+    e.g. genofunc filter_fasta --in-dir tests/data/sequences/gene_fasta/ --in-metadata tests/data/metadata/metadataB.tsv --genes pol gag --min-length 0.95 --symmetric --out-dir tests/data/output/
 
 #### gene_concatenator
 
@@ -70,7 +70,7 @@ Description: Merges two or more fasta files avoiding duplicates based on matches
         --index-field: The column ID with matching sequence IDs with fasta file (Required)
         --out-dir: Output merged sequence and metadata file from multiple inputs (Default: ./).
 
-    e.g. genofunc merge --in-fasta tests/data/sequences/seqA.fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataA.csv tests/data/metadata/metadataB.csv --index-field strain --out-dir tests/data/output/
+    e.g. genofunc merge --in-fasta tests/data/sequences/seqA.fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataA.tsv tests/data/metadata/metadataB.tsv --index-field strain --out-dir tests/data/output/
 
 #### name_splitter
 
@@ -105,7 +105,7 @@ Description: Encoded strain id into non-defining ids.
         --encoding-column: Column for the base for encoding information (Required)
         --out-dir: Output folder including encoded files (Default: ./)
 
-    e.g. genofunc strain_encoder --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --encoding-column 2 --out-dir tests/data/output/
+    e.g. genofunc strain_encoder --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.tsv --encoding-column 2 --out-dir tests/data/output/
 
 
 
