@@ -34,7 +34,7 @@ Description: Extract relevent metadata based on index fields from metadata file 
         --out-metadata: Output metadata file (Default: extracted_metadata.csv)
         --log-file: Output additional information from the program (default: stdout)
 
-    e.g. genofunc extract_metadata --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --column country --id-column strain --out-fasta tests/data/result/extract.fasta --out-metadata tests/data/output/extract_metadata.csv
+    e.g. genofunc extract_metadata --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --column country --id-column strain --out-fasta tests/data/output/extract.fasta --out-metadata tests/data/output/extract_metadata.csv
 
 #### filter_fasta
 
