@@ -18,7 +18,7 @@ Description: Concatenate all fasta file with the same gene regions into one sequ
         --out-dir: Output directory after concatenating all fasta files with the same gene name (Default: ./)
         --log-file: Output additional information from the program (default: stdout)
 
-    e.g. genofunc concatenate_fasta --in-prefix test/data/sequences/concatenate_fasta/ --gene pol gag --out-dir test/data/output/
+    e.g. genofunc concatenate_fasta --in-prefix tests/data/sequences/concatenate_fasta/ --gene pol gag --out-dir tests/data/output/
 
 #### extract_metadata
 
@@ -34,7 +34,7 @@ Description: Extract relevent metadata based on index fields from metadata file 
         --out-metadata: Output metadata file (Default: extracted_metadata.csv)
         --log-file: Output additional information from the program (default: stdout)
 
-    e.g. genofunc extract_metadata --in-fasta test/data/sequences/seqB.fasta --in-metadata test/data/metadata/metadataB.csv --column country --id-column strain --out-fasta test/data/result/extract.fasta --out-metadata test/data/output/extract_metadata.csv
+    e.g. genofunc extract_metadata --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --column country --id-column strain --out-fasta tests/data/result/extract.fasta --out-metadata tests/data/output/extract_metadata.csv
 
 #### filter_fasta
 
@@ -48,7 +48,7 @@ Description: Filter fasta file based on minimum sequence length.
         --symmetric: Require all gene regions to be available for the same sequence (Default: False)
         --out-dir: Output directory after filtering (Default: ./)
 
-    e.g. genofunc filter_fasta --in-dir test/data/sequences/gene_fasta/ --in-metadata test/data/metadata/metadataB.csv --genes pol gag --min-length 0.95 --symmetric --out-dir test/data/output/
+    e.g. genofunc filter_fasta --in-dir tests/data/sequences/gene_fasta/ --in-metadata tests/data/metadata/metadataB.csv --genes pol gag --min-length 0.95 --symmetric --out-dir tests/data/output/
 
 #### gene_concatenator
 
@@ -58,7 +58,7 @@ Description: Concatenate fasta file based on similar sequence names of multiple 
         --in-fasta: Multiple fasta files for concatenation (Required)
         --out-fasta: Output fasta file (Default: concatenate.fasta)
 
-    e.g. genofunc gene_concatenator --in-fasta test/data/sequences/gene_fasta/pol.fasta test/data/sequences/gene_fasta/gag.fasta --out-fasta test/data/output/gag_pol.fasta
+    e.g. genofunc gene_concatenator --in-fasta tests/data/sequences/gene_fasta/pol.fasta tests/data/sequences/gene_fasta/gag.fasta --out-fasta tests/data/output/gag_pol.fasta
 
 #### merge
 
@@ -70,7 +70,7 @@ Description: Merges two or more fasta files avoiding duplicates based on matches
         --index-field: The column ID with matching sequence IDs with fasta file (Required)
         --out-dir: Output merged sequence and metadata file from multiple inputs (Default: ./).
 
-    e.g. genofunc merge --in-fasta test/data/sequences/seqA.fasta test/data/sequences/seqB.fasta --in-metadata test/data/metadata/metadataA.csv test/data/metadata/metadataB.csv --index-field strain --out-dir test/data/output/
+    e.g. genofunc merge --in-fasta tests/data/sequences/seqA.fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataA.csv tests/data/metadata/metadataB.csv --index-field strain --out-dir tests/data/output/
 
 #### name_splitter
 
@@ -82,7 +82,7 @@ Description: Split the sequence name into metadata based on piping character.
         --header: Header for the output metadata table (Default: "")
         --out-metadata: Output metadata file (Default: metadata.csv)
 
-    e.g. genofunc name_splitter --in-fasta test/data/sequences/seq_pipe.fasta --pipe | --out-metadata test/data/output/output_metadata.csv
+    e.g. genofunc name_splitter --in-fasta tests/data/sequences/seq_pipe.fasta --pipe | --out-metadata tests/data/output/output_metadata.csv
 
 #### rename_fasta
 
@@ -93,7 +93,7 @@ Description: Renaming fasta sequence names based on character splits.
         --pipe: Input character the fasta sequence name is split based on (Required)
         --out-fasta: Output fasta file (Default: cleaned_sequences.fasta)
 
-    e.g. genofunc rename_fasta --in-fasta test/data/sequences/seq_pipe.fasta --pipe | --out-fasta test/data/output/depipe.fasta
+    e.g. genofunc rename_fasta --in-fasta tests/data/sequences/seq_pipe.fasta --pipe | --out-fasta tests/data/output/depipe.fasta
 
 #### strain_encoder
 
@@ -105,7 +105,7 @@ Description: Encoded strain id into non-defining ids.
         --encoding-column: Column for the base for encoding information (Required)
         --out-dir: Output folder including encoded files (Default: ./)
 
-    e.g. genofunc strain_encoder --in-fasta test/data/sequences/seqB.fasta --in-metadata test/data/metadata/metadataB.csv --encoding-column 2 --out-dir test/data/output/
+    e.g. genofunc strain_encoder --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.csv --encoding-column 2 --out-dir tests/data/output/
 
 
 
@@ -125,7 +125,7 @@ Description: Extract gene(s) sequences from annotated json file based on user in
         --filter-span: Minimum gene sequence length to be filtered (Default: 0)
         --out-prefix: Output prefix for output sequences (Default: extracted_)
 
-    e.g. genofunc feature_extractor --annotated-file test/data/sequences/annotated.json --gene pol gag --strip-gap --filter-span 0.9 --out-prefix test/data/output/extracted_ 
+    e.g. genofunc feature_extractor --annotated-file tests/data/sequences/annotated.json --gene pol gag --strip-gap --filter-span 0.9 --out-prefix tests/data/output/extracted_ 
 
 #### genome_annotator
 
@@ -136,7 +136,7 @@ Description: Annotate genomes based on closest reference sequence annotation.
         --reference-sequence: Annotated reference sequences in json format (Required)
         --out-annotation: Output list of sequences annotated in json format (Default: referenced.json)
 
-    e.g. genofunc genome_annotator --raw-fasta test/data/sequences/referenced.fasta --reference-sequence test/data/reference/reference.json --out-annotation test/data/output/annotated.json
+    e.g. genofunc genome_annotator --raw-fasta tests/data/sequences/referenced.fasta --reference-sequence tests/data/reference/reference.json --out-annotation tests/data/output/annotated.json
 
 #### reference_matcher
 
@@ -147,7 +147,7 @@ Description: Map sequence to the closest reference sequence list based on mini-m
         --reference-sequence: Reference list in fasta format (Required)
         --out-fasta: Output list of sequences referenced (Default: referenced.fasta)
 
-    e.g. genofunc reference_matcher --in-fasta test/data/sequences/seqA.fasta --referenced-sequence test/data/reference/reference.fasta --out-fasta test/data/output/referenced.fasta
+    e.g. genofunc reference_matcher --in-fasta tests/data/sequences/seqA.fasta --referenced-sequence tests/data/reference/reference.fasta --out-fasta tests/data/output/referenced.fasta
 
 #### group_align
 
@@ -159,5 +159,5 @@ Description: Split the fasta file into groups of sequences set by a user thresho
         --reference-dir: Reference sequence directory. Reference sequence used based on matching sequence and reference file names (Required)
         --out-dir: Output folder directory (Default: ./)
 
-    e.g. genofunc group_align --in-dir test/data/sequences/group_align/ --group-size 10 --reference-dir test/data/reference/ --out-dir test/data/output/
+    e.g. genofunc group_align --in-dir tests/data/sequences/group_align/ --group-size 10 --reference-dir tests/data/reference/ --out-dir tests/data/output/
 
