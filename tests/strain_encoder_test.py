@@ -14,7 +14,7 @@ data_dir = os.path.join(this_dir, 'tests', 'data')
 class TestStrainEncoder(unittest.TestCase):
     def test_run_strain_encoder(self):
         in_fasta = "%s/sequences/seqB.fasta" %data_dir
-        in_metadata = "%s/metadata/seq_pipe.fasta" %data_dir
+        in_metadata = "%s/metadata/metadataB.tsv" %data_dir
         encoding_column = 2
         out_dir = "%s/output/" %data_dir
         log_file = "%s/output/tmp.strain_encoder.log" %data_dir
