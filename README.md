@@ -1,6 +1,6 @@
 # genofunc
 
-A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installtion can be done by pulling the genofunc folder and running setup.py.
+A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installtion can be done by pulling the genofunc folder and running python setup.py install.
 
 
 ### Fasta and/or Metadata Manipulation
@@ -18,7 +18,7 @@ Description: Concatenate all fasta file with the same gene regions into one sequ
         --out-dir: Output directory after concatenating all fasta files with the same gene name (Default: ./)
         --log-file: Output additional information from the program (default: stdout)
 
-    e.g. genofunc concatenate_fasta --in-prefix test/data/sequences/gene_fasta/ --gene pol gag --out-dir test/data/output/
+    e.g. genofunc concatenate_fasta --in-prefix test/data/sequences/concatenate_fasta/ --gene pol gag --out-dir test/data/output/
 
 #### extract_metadata
 
