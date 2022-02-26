@@ -14,7 +14,7 @@ data_dir = os.path.join(this_dir, 'tests', 'data')
 class TestFilterFasta(unittest.TestCase):
     def test_run_filter_fasta(self):
         in_dir = "%s/sequences/gene_fasta" %data_dir
-        in_metadata = "%s/metadata/metadataB.csv" %data_dir
+        in_metadata = "%s/metadata/metadataB.tsv" %data_dir
         gene = "pol gag"
         min_length = 0.9
         symmetric = True
