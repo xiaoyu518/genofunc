@@ -31,9 +31,9 @@ Extract relevent metadata based on index fields from metadata file using fasta f
 
 def extract_metadata(in_fasta,in_metadata,column_name,column_rename,id_column,out_fasta,out_metadata,log_file):
 
-    output_fasta = get_out_handle(out_fasta)
+    output_fasta = open(out_fasta,"w")
     log_handle = get_log_handle(log_file)
-    output_metadata = get_out_handle(out_metadata)
+    output_metadata = open(out_metadata,"w")
     seq_list = []
 
     if file_check(in_fasta):
@@ -71,7 +71,7 @@ def extract_metadata(in_fasta,in_metadata,column_name,column_rename,id_column,ou
 
     out_list = out_df[id_column].tolist()
 
-    for record in SeqIO.parse(output_fasta, "fasta"):
+    for record in SeqIO.parse(in_fasta, "fasta"):
         if record.id in out_list:
             SeqIO.write(record, output_fasta, "fasta-2line")
         else:
