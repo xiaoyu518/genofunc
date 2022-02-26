@@ -14,7 +14,7 @@ data_dir = os.path.join(this_dir, 'tests', 'data')
 class TestExtractMetadata(unittest.TestCase):
     def test_run_extract_metadata(self):
         in_fasta = "%s/sequences/seqB.fasta" %data_dir
-        in_metadata = "%s/metadata/metadataB.csv" %data_dir
+        in_metadata = "%s/metadata/metadataB.tsv" %data_dir
         column = ["country"]
         index_field = "strain"
         out_fasta = "%s/output/tmp.extract.fasta" %data_dir
