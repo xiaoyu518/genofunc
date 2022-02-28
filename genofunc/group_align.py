@@ -53,7 +53,7 @@ def group_align(in_dir,group_size,reference_dir,out_dir,log_file):
         output_fasta = open(out_file,"w")
         for gene in ref_table.keys():
             if files.find(gene) > -1:
-                ref_seq = ref_table[gene]
+                ref_seq = reference_dir + ref_table[gene]
                 file_name = gene + "_alignment.fasta"
                 break
         for record in SeqIO.parse(files, "fasta"):    
@@ -99,7 +99,6 @@ def group_align(in_dir,group_size,reference_dir,out_dir,log_file):
             log_handle.write("File " + removal + " has been removed.\n")
 
         log_handle.write("File " + file_name + " has been created without any reference sequences.\n")
-        os.remove(files)
 
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
