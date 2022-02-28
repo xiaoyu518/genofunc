@@ -21,7 +21,7 @@ from Bio import SeqIO
 import datetime as dt
 from genofunc.utils import *
 
-def extract_metadata(raw_fasta,reference_sequence,annotated_json,log_file):
+def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
     time_start = dt.datetime.now()
     location_dic = {}
     reference_dic = {}
@@ -74,7 +74,7 @@ def extract_metadata(raw_fasta,reference_sequence,annotated_json,log_file):
         json_dumps_str = json.dumps(reference_dic, indent=4)
         print(json_dumps_str, file=f)
 
-    close_handle(log_handle)
-
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
+
+    close_handle(log_handle)
