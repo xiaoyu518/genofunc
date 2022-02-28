@@ -76,14 +76,14 @@ def group_align(in_dir,group_size,reference_dir,out_dir,log_file):
         #For the last file with sequences not reaching group size
         log_handle.write("File " + out_file + " has been created with " + str(seq_counter) + " sequences.\n")
         output_fasta.close()
-        align_file = out_file[:-12] + "_aligned.fasta"
+        align_file = out_file[:-6] + "_aligned.fasta"
         align_args = ["augur","align","--sequences",out_file,"--reference-sequence",ref_seq,"--remove-reference","--output",align_file]
         log_handle.write("File " + align_file + " has been created with reference sequence " + ref_seq + ".\n")
         alignment = sp.Popen(align_args)
         alignment.wait()
         os.remove(out_file)  
 
-        cat_file = out_dir + os.path.basename(files)[:-13] + "_alignment.fasta"
+        cat_file = out_dir + os.path.basename(files)[:-6] + "_alignment.fasta"
         cat_command = "cat " + out_dir + "*_aligned.fasta > " + cat_file
         os.system(cat_command)
         log_handle.write("File " + cat_file + " has been created with all groups from " + files +".\n")
