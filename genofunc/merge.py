@@ -52,7 +52,7 @@ def merge(in_fasta,in_metadata,index_field,out_dir,log_file):
     for metadata_file in in_metadata:
         with open(metadata_file,"r") as f:
             seperator = ','
-            if in_metadata.endswith('tsv'):
+            if metadata_file.endswith('tsv'):
                 seperator = '\t'
             reader = csv.DictReader(f,delimiter=seperator)
             reader.fieldnames = [name.lower() for name in reader.fieldnames]
@@ -68,9 +68,6 @@ def merge(in_fasta,in_metadata,index_field,out_dir,log_file):
                 metadata_dictionary[taxon_name] = sequence
             else:
                 log_handle.write("Sequence " + taxon_name + " had a duplicate in metadata and the new metadata is removed\n")
-        else:
-            print("File does not exist, program exiting.")
-            sys.exit()
 
     sequence_list = list(metadata_dictionary.keys())
     out_list = list(metadata_dictionary.values())
@@ -80,7 +77,7 @@ def merge(in_fasta,in_metadata,index_field,out_dir,log_file):
     f.writerows(out_list)
     close_handle(out_metadata)
 
-    for fasta_file in input_fasta:
+    for fasta_file in in_fasta:
         for record in SeqIO.parse(fasta_file, "fasta"):
             if record.id in sequence_list and record.id not in sequence_dictionary.keys():
                 sequence_dictionary[record.id] = record.seq
