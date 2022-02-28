@@ -105,7 +105,7 @@ Description: Encoded strain id into non-defining ids.
         --encoding-column: Column for the base for encoding information (Required)
         --out-dir: Output folder including encoded files (Default: ./)
 
-    e.g. genofunc strain_encoder --in-fasta tests/data/sequences/seqB.fasta --in-metadata tests/data/metadata/metadataB.tsv --encoding-column 2 --out-dir tests/data/output/
+    e.g. genofunc strain_encoder --in-fasta tests/data/sequences/strain_encoder/ --in-metadata tests/data/metadata/metadataB.tsv --encoding-column 2 --out-dir tests/data/output/
 
 
 
@@ -147,7 +147,7 @@ Description: Map sequence to the closest reference sequence list based on mini-m
         --reference-sequence: Reference list in fasta format (Required)
         --out-fasta: Output list of sequences referenced (Default: referenced.fasta)
 
-    e.g. genofunc reference_matcher --in-fasta tests/data/sequences/seqA.fasta --referenced-sequence tests/data/reference/reference.fasta --out-fasta tests/data/output/referenced.fasta
+    e.g. genofunc reference_matcher --in-fasta tests/data/sequences/seqA.fasta --reference-sequence tests/data/reference/reference.fasta --out-fasta tests/data/output/referenced.fasta
 
 #### group_align
 
