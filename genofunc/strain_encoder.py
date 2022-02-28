@@ -31,7 +31,7 @@ def strain_encoder(in_fasta,in_metadata,encoding_column,out_dir,log_file):
         print("No fasta files in input directory. Please re-enter new one. Program Exiting.")
         sys.exit()
 
-    if file_check(in_metadata):
+    if not file_check(in_metadata):
         print("Metadata file does not exist. Please enter a new file path. Program Exiting")
         sys.exit()
 
