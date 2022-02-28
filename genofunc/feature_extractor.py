@@ -74,7 +74,7 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
             SeqIO.write(new_record, outfile, "fasta-2line")
         close_handle(outfile)
 
-    close_handle(log_handle)
-
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
+    
+    close_handle(log_handle)
