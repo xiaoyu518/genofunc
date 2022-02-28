@@ -21,7 +21,7 @@ import sys
 from genofunc.utils import *
 
 def gene_concatenator(in_fasta,out_fasta,log_file):
-    output_fasta = get_out_handle(out_fasta)
+    output_fasta = open(out_fasta,"w")
     log_handle = get_log_handle(log_file)
     seq_dic = {}
 
