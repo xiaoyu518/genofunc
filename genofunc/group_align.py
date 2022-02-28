@@ -22,10 +22,11 @@ import glob
 import os
 import sys
 import subprocess as sp
+from genofunc.utils import *
 
 def group_align(in_dir,group_size,reference_dir,out_dir,log_file):
-    time_start = dt.datetime.now()
     log_handle = get_log_handle(log_file)
+    time_start = dt.datetime.now()
     fasta_files = glob.glob(in_dir + "*.fasta")
     ref_files = glob.glob(reference_dir + "*.fasta")
     ref_table = {"gag":"gag_ref.fasta",
@@ -99,8 +100,8 @@ def group_align(in_dir,group_size,reference_dir,out_dir,log_file):
 
         log_handle.write("File " + file_name + " has been created without any reference sequences.\n")
         os.remove(files)
-        
-    close_handle(log_handle)
 
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
+
+    close_handle(log_handle)
