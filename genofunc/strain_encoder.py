@@ -18,7 +18,6 @@ Copyright 2020 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk).
 
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
-import os
 import sys
 import glob
 from genofunc.utils import *
@@ -65,7 +64,6 @@ def strain_encoder(in_fasta,in_metadata,encoding_column,out_dir,log_file):
             new_id = encoding_dic[record.id]
             new_record = SeqRecord(record.seq,new_id,description="")
             SeqIO.write(new_record, output_sequence, "fasta-2line")
-        os.remove(files)
         output_sequence.close() 
 
     with open(in_metadata,"r") as f:
