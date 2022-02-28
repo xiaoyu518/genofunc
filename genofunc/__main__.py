@@ -194,7 +194,7 @@ def main(args=None):
         help='Annotated reference sequences in json format'
     )
     subparser_genome_annotator.add_argument(
-        '--out-annotation', dest='annotated_json', metavar='<filename>', required=False, default="referenced.json",
+        '--out-annotation', dest='out_annotation', metavar='<filename>', required=False, default="referenced.json",
         help='Output list of sequences annotated in json format'
     )
 
