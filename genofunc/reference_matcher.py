@@ -66,6 +66,7 @@ def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
         SeqIO.write(new_record, outfile, "fasta-2line")
         log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,matching_length,mismatches,start_ref,end_ref,cigar_array))
     
-    close_handle(log_handle)
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
+    
+    close_handle(log_handle)
