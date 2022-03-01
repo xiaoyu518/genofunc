@@ -26,7 +26,7 @@ Split the sequence name into metadata based on piping character.
 :return:
 """
 
-def name_splitter(in_fasta,piping_character,out_metadata,header,log_file):
+def name_splitter(in_fasta,piping_character,header,out_metadata,log_file):
     log_handle = get_log_handle(log_file)
 
     if header == "":
@@ -37,7 +37,7 @@ def name_splitter(in_fasta,piping_character,out_metadata,header,log_file):
     if file_check(in_fasta):
         for record in SeqIO.parse(in_fasta, "fasta"):
             if record.id.find(piping_character) == -1:
-                log_handle.write(record.id + " does not contain the split character.\n")
+                log_handle.write(record.id + " does not contain the split character. No metadata created\n")
                 sys.exit()
             else:
                 row = record.id.split(piping_character)
