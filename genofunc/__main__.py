@@ -299,7 +299,7 @@ def main(args=None):
         help='Reference list in fasta format'
     )
     subparser_reference_matcher.add_argument(
-        '--out_fasta', dest='out_fasta', default="referenced.fasta", metavar='<filename>', required=False,
+        '--out-fasta', dest='out_fasta', default="referenced.fasta", metavar='<filename>', required=False,
         help='Output list of referenced sequences (Default:referenced.fasta)'
     )
 
