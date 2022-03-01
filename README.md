@@ -82,7 +82,7 @@ Description: Split the sequence name into metadata based on piping character.
         --header: Header for the output metadata table (Default: "")
         --out-metadata: Output metadata file (Default: metadata.csv)
 
-    e.g. genofunc name_splitter --in-fasta tests/data/sequences/seq_pipe.fasta --pipe | --out-metadata tests/data/output/output_metadata.csv
+    e.g. genofunc name_splitter --in-fasta tests/data/sequences/seq_pipe.fasta --pipe '|' --out-metadata tests/data/output/output_metadata.csv
 
 #### rename_fasta
 
@@ -93,7 +93,7 @@ Description: Renaming fasta sequence names based on character splits.
         --pipe: Input character the fasta sequence name is split based on (Required)
         --out-fasta: Output fasta file (Default: cleaned_sequences.fasta)
 
-    e.g. genofunc rename_fasta --in-fasta tests/data/sequences/seq_pipe.fasta --pipe | --out-fasta tests/data/output/depipe.fasta
+    e.g. genofunc rename_fasta --in-fasta tests/data/sequences/seq_pipe.fasta --pipe '|' --out-fasta tests/data/output/depipe.fasta
 
 #### strain_encoder
 
