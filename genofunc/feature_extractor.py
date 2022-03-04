@@ -57,6 +57,7 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
                 end = [int(coordinates[1]),int(coordinates[3])]
                 temp_seq = input_data[sequences]["sequence"][begin[0]-1:end[0]-1] + input_data[sequences]["sequence"][begin[1]-1:end[1]-1]
                 length = (end[0] + end[1]) - (begin[0] + begin[1])
+            temp_seq = temp_seq.replace("N","-")
             if strip_gap:
                 temp_seq = temp_seq.replace("-","")
             span = round(float(len(temp_seq))/length,2)
