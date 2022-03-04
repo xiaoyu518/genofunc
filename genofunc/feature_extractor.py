@@ -10,7 +10,7 @@ Options:
     :param in_annotation: Annotated json file containing all sequences (Required)
     :param gene_region: Gene regions to be extracted (Required)
     :param strip_gap: Strip gap bases within gene regions (Default: False)
-    :param filter_span: Minimum gene sequence length to be filtered (Default: 0)
+    :param filter_span: Minimum base ratio of non N in gene sequence length to be filtered (Default: 0)
     :param output_prefix: Output prefix for output sequences (Default: extracted_)
 
 This file is part of PANGEA HIV project (www.pangea-hiv.org).
@@ -59,7 +59,7 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
                 length = (end[0] + end[1]) - (begin[0] + begin[1])
             if strip_gap:
                 temp_seq = temp_seq.replace("-","")
-            span = len(temp_seq)/length
+            span = round(float(len(temp_seq))/length,2)
             if span < filter_span:
                 log_handle.write(strain_id + " " + gene + " gene region sequence length is shorter than the minimum required span length "
                 + str(filter_span) + " and therefore filtered out.\n")
@@ -76,5 +76,5 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
 
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
-    
+
     close_handle(log_handle)
