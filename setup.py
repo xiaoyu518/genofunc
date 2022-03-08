@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="genofunc",
-    version="0.1.0",
+    version="1.0.0",
     packages=find_packages(),
     url="https://github.com/xiaoyu518/genofunc",
     license="MIT",
@@ -14,7 +14,8 @@ setup(
         "numpy>=1.18",
         "pandas>=0.24.2",
         "nextstrain-augur>=13.1.2",
-        "mappy>=2.24"
+        "mappy>=2.24",
+        "parasail>=1.2.4"
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
