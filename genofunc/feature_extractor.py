@@ -59,7 +59,7 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
                 length = (end[0] + end[1]) - (begin[0] + begin[1])
             temp_seq = temp_seq.replace("N","-")
             if strip_gap:
-                temp_seq = temp_seq.replace("-","")
+                temp_seq = temp_seq.replace("-","")            
             span = round(float(len(temp_seq))/length,2)
             if span < filter_span:
                 log_handle.write(strain_id + " " + gene + " gene region sequence length is shorter than the minimum required span length "
@@ -69,7 +69,7 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
                 output_dic[gene][strain_id] = temp_seq
 
     for k in output_dic.keys():
-        outfile = open(output_prefix + k + "_extracted.fasta","w")
+        outfile = open(output_prefix + k + ".fasta","w")
         for id, seq in output_dic[k].items():
             new_record = SeqRecord(Seq(seq),id,description="")
             SeqIO.write(new_record, outfile, "fasta-2line")
