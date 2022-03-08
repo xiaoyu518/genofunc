@@ -51,22 +51,12 @@ def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
                 start_ref = hit.r_st
                 end_ref = hit.r_en
                 cigar_array = hit.cigar
-        temp_string = int(start_ref)*"-"
-        counter = 0
-        for i in cigar_array:
-            if i[1] == 0:
-                temp_string += str(record.seq)[counter:counter+i[0]]
-                counter += i[0]
-            if i[1] == 1:
-                counter += i[0]
-            if i[1] == 2:
-                temp_string += int(i[0])*"-"
             new_id = "|".join([record.id,str(matching_length),reference_id])
-            new_record = SeqRecord(Seq(temp_string),new_id,description="")
+            new_record = SeqRecord(record.seq,new_id,description="")
         SeqIO.write(new_record, outfile, "fasta-2line")
         log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,matching_length,mismatches,start_ref,end_ref,cigar_array))
     
     time_ran = dt.datetime.now() - time_start
     print("Time Lapse:", time_ran.total_seconds() / 60, "Minutes")
-    
+
     close_handle(log_handle)
