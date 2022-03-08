@@ -17,6 +17,7 @@ Copyright 2021 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk).
 
 import json
 import sys
+import parasail
 from Bio import SeqIO
 import datetime as dt
 from genofunc.utils import *
@@ -25,7 +26,36 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
     time_start = dt.datetime.now()
     location_dic = {}
     reference_dic = {}
+    sequence_dic = {}
     features = []
+
+    user_matrix = parasail.matrix_create("ACGTRY?", 5, -4)
+    user_matrix[0,2] = -1   #A-G
+    user_matrix[0,4] = 0    #A-R
+    user_matrix[0,6] = 0    #A-?
+    user_matrix[1,3] = -1   #C-T
+    user_matrix[1,5] = 0    #C-Y
+    user_matrix[1,6] = 0    #C-?
+    user_matrix[2,0] = -1   #G-A
+    user_matrix[2,4] = 0    #G-R
+    user_matrix[2,6] = 0    #G-?
+    user_matrix[3,1] = -1   #T-C
+    user_matrix[3,5] = 0    #T-Y
+    user_matrix[3,6] = 0    #T-?
+    user_matrix[4,0] = 0    #R-A
+    user_matrix[4,2] = 0    #R-G
+    user_matrix[4,6] = 0    #R-?
+    user_matrix[5,1] = 0    #Y-C
+    user_matrix[5,3] = 0    #Y-T
+    user_matrix[5,6] = 0    #Y-?
+    user_matrix[6,0] = 0    #?-A
+    user_matrix[6,1] = 0    #?-C
+    user_matrix[6,2] = 0    #?-G
+    user_matrix[6,3] = 0    #?-T
+    user_matrix[6,4] = 0    #?-R
+    user_matrix[6,5] = 0    #?-Y
+    user_matrix[6,5] = 0    #?-N
+    user_matrix[6,6] = 0    #?-?
 
     if not file_check(raw_fasta):
         print("Input file does not exist. Please check the file path.")
@@ -41,6 +71,7 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
 
     for k,v in reference_data.items():
         for i in v:
+            sequence_dic[i["accession"]] = i["sequence"]
             location_dic[i["accession"]] = {}
             location_dic[i["accession"]]["sequence"] = i["sequence"]
             for genes in i["locations"]["location"]:
@@ -56,13 +87,12 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
                         temp_list.append(v)
                 location_dic[i["accession"]][genes["featureId"]] = "|".join(temp_list)
 
-
     for record in SeqIO.parse(raw_fasta, "fasta"):
         id = record.id[:record.id.find("|")]
         reference_strain = record.id.split(".")[-1]
+        cigarResults = parasail.sg_trace_striped_32(str(sequence_dic[reference_strain]), str(record.seq), 10, 1, user_matrix)
         reference_dic[id] = {}
-        temp_string = str(record.seq).replace("?","-")
-        reference_dic[id]["sequence"] = temp_string.upper()
+        reference_dic[id]["sequence"] = cigarResults.traceback.query
         for genes in features:
             if genes not in location_dic[reference_strain].keys():
                 log_handle.write(record.id + " does not contain " + genes + " region.\n")
