@@ -18,6 +18,7 @@ Copyright 2021 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk).
 import json
 import sys
 import parasail
+import re
 from Bio import SeqIO
 import datetime as dt
 from genofunc.utils import *
@@ -92,13 +93,17 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
         reference_strain = record.id.split(".")[-1]
         cigarResults = parasail.sg_trace_striped_32(str(sequence_dic[reference_strain]), str(record.seq), 10, 1, user_matrix)
         reference_dic[id] = {}
-        reference_dic[id]["sequence"] = cigarResults.traceback.query
+        reference_dic[id]["sequence"] = cigarResults.traceback.ref
+        pos_searcher = re.findall('[0-9]+', str(cigarResults.cigar.decode))
         for genes in features:
             if genes not in location_dic[reference_strain].keys():
                 log_handle.write(record.id + " does not contain " + genes + " region.\n")
                 continue
-            else:           
-                reference_dic[id][genes] = location_dic[reference_strain][genes]
+            else:
+                coordinates = location_dic[reference_strain][genes].split("|")
+                for i in range(len(coordinates)):
+                    coordinates[i] = str(int(coordinates[i]) + int(pos_searcher[0]))
+                reference_dic[id][genes] = "|".join(coordinates)
 
     with open(annotated_json, 'w') as f:
         json_dumps_str = json.dumps(reference_dic, indent=4)
