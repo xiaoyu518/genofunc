@@ -24,6 +24,39 @@ import datetime as dt
 from genofunc.utils import *
 
 def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
+    def extract_int(base_pos,input_string):
+        temp_string = ""
+        for j in input_string[base_pos:]:
+            if j.isdigit():
+                temp_string += j
+            else:
+                break
+        return int(temp_string)
+    def createCigarDic(cigar):
+        base_position = 1
+        cigar_pos = 0
+        cigar_dic = {}
+        cigar_dic["deletion"] = []
+        cigar_dic["insertion"] = []
+        while cigar_pos < len(cigar):
+            matching_move = extract_int(cigar_pos,cigar)
+            cigar_pos += len(str(matching_move))
+            if cigar[cigar_pos] == "=":
+                base_position += matching_move
+            elif cigar[cigar_pos] == "X":
+                base_position += matching_move
+            elif cigar[cigar_pos] == "D":
+                cigar_dic["deletion"].append([base_position,matching_move])
+                base_position += matching_move
+            elif cigar[cigar_pos] == "I":
+                cigar_dic["insertion"].append([base_position,matching_move])
+                base_position += matching_move
+            else:
+                print("Invalid Cigar Operator: " + cigar[cigar_pos])
+            cigar_pos += 1
+        return cigar_dic
+
+
     time_start = dt.datetime.now()
     location_dic = {}
     reference_dic = {}
@@ -94,7 +127,7 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
         cigarResults = parasail.sg_trace_striped_32(str(sequence_dic[reference_strain]), str(record.seq), 10, 1, user_matrix)
         reference_dic[id] = {}
         reference_dic[id]["sequence"] = cigarResults.traceback.ref
-        pos_searcher = re.findall('[0-9]+', str(cigarResults.cigar.decode))
+        query_cigar_dic = createCigarDic(cigarResults.cigar.decode.decode('ascii'))
         for genes in features:
             if genes not in location_dic[reference_strain].keys():
                 log_handle.write(record.id + " does not contain " + genes + " region.\n")
@@ -102,7 +135,21 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
             else:
                 coordinates = location_dic[reference_strain][genes].split("|")
                 for i in range(len(coordinates)):
-                    coordinates[i] = str(int(coordinates[i]) + int(pos_searcher[0]))
+                    counter = 0
+                    gene_coordinate = int(coordinates[i])
+                    for j in query_cigar_dic["deletion"]:
+                        deletion_base = int(j[0])
+                        if deletion_base <= gene_coordinate:
+                            counter += int(j[1])
+                        else:
+                            break
+                    for j in query_cigar_dic["insertion"]:
+                        insertion_base = int(j[0])
+                        if insertion_base <= gene_coordinate:
+                            counter -= int(j[1])
+                        else:
+                            break
+                    coordinates[i] = str(gene_coordinate + counter)
                 reference_dic[id][genes] = "|".join(coordinates)
 
     with open(annotated_json, 'w') as f:
