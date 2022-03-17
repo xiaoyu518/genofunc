@@ -41,16 +41,14 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
         while cigar_pos < len(cigar):
             matching_move = extract_int(cigar_pos,cigar)
             cigar_pos += len(str(matching_move))
-            if cigar[cigar_pos] == "=":
-                base_position += matching_move
-            elif cigar[cigar_pos] == "X":
-                base_position += matching_move
+            if cigar[cigar_pos] in ["=","X"]:
+                base_position += matching_move                
             elif cigar[cigar_pos] == "D":
                 cigar_dic["deletion"].append([base_position,matching_move])
-                base_position += matching_move
+                base_position += matching_move                
             elif cigar[cigar_pos] == "I":
                 cigar_dic["insertion"].append([base_position,matching_move])
-                base_position += matching_move
+                base_position += matching_move                
             else:
                 print("Invalid Cigar Operator: " + cigar[cigar_pos])
             cigar_pos += 1
@@ -141,12 +139,6 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
                         deletion_base = int(j[0])
                         if deletion_base <= gene_coordinate:
                             counter += int(j[1])
-                        else:
-                            break
-                    for j in query_cigar_dic["insertion"]:
-                        insertion_base = int(j[0])
-                        if insertion_base <= gene_coordinate:
-                            counter -= int(j[1])
                         else:
                             break
                     coordinates[i] = str(gene_coordinate + counter)
