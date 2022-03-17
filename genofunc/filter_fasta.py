@@ -4,7 +4,7 @@
 Name: filter_fasta.py
 Author: Xiaoyu Yu
 Date: 01 April 2022
-Description: Filter fasta file based on minimum length. 
+Description: Filter fasta file based on minimum length threshold. 
 
 Options:
     :param in_dir: Input directory (Required)
@@ -39,13 +39,13 @@ def filter_fasta(in_dir,in_metadata,gene_list,min_length,symmetric,out_dir,log_f
         sys.exit()
 
     for files in fasta_files:
-        max_len = 0
+        seq_length_list = []
         output_file = out_dir + files[files.rfind("/")+1:-6]+"_filtered.fasta"
         out_f = open(output_file,"w")
         for record in SeqIO.parse(files, "fasta"):
-            if len(record.seq) > max_len:
-                max_len = len(record.seq)
-        min_lengths = math.trunc(min_length*max_len)
+            seq_length_list.append(len(record.seq))
+        average_len = sum(seq_length_list)/len(seq_length_list)
+        min_threshold = math.trunc(min_length*average_len)
         flag = False
         for gene in gene_list:
             if files.find(gene) > -1:
@@ -55,7 +55,7 @@ def filter_fasta(in_dir,in_metadata,gene_list,min_length,symmetric,out_dir,log_f
         if flag == False:
             log_handle.write("Folder does not contain " + gene + " file.\n")                       
         for record in SeqIO.parse(files, "fasta"):
-            if len(record.seq) >= min_lengths:
+            if len(record.seq) >= min_threshold:
                 if record.id.find("|") > -1:
                     record.id = record.id[:record.id.find("|")]
                 gene_dic[file_gene].append(record.id)
