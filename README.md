@@ -48,7 +48,7 @@ Description: Filter fasta file based on minimum sequence length.
         --symmetric: Require all gene regions to be available for the same sequence (Default: False)
         --out-dir: Output directory after filtering (Default: ./)
 
-    e.g. genofunc filter_fasta --in-dir tests/data/sequences/gene_fasta/ --in-metadata tests/data/metadata/metadataB.tsv --genes pol gag --min-length 0.95 --symmetric --out-dir tests/data/output/
+    e.g. genofunc filter_fasta --in-dir tests/data/sequences/gene_fasta/ --in-metadata tests/data/metadata/metadataB.tsv --genes pol gag --min-length 0.85 --symmetric --out-dir tests/data/output/
 
 #### gene_concatenator
 
