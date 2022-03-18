@@ -10,7 +10,8 @@ Options:
     :param in_annotation: Annotated json file containing all sequences (Required)
     :param gene_region: Gene regions to be extracted (Required)
     :param strip_gap: Strip gap bases within gene regions (Default: False)
-    :param filter_span: Minimum base ratio of non N in gene sequence length to be filtered (Default: 0)
+    :param filter_coverage: Minimum base ratio of non N in gene sequence length to be filtered (Default: 0)
+    :param filter_span: Minimum sequence length to be filtered (Default: 0)
     :param output_prefix: Output prefix for output sequences (Default: extracted_)
 
 This file is part of PANGEA HIV project (www.pangea-hiv.org).
@@ -25,7 +26,7 @@ import sys
 import datetime as dt
 from genofunc.utils import *
 
-def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_prefix,log_file):
+def feature_extractor(in_annotation,gene_region,strip_gap,filter_coverage,filter_span,output_prefix,log_file):
     time_start = dt.datetime.now()
     output_dic = {}
     
@@ -44,26 +45,32 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_span,output_pre
     for sequences in input_data.keys():
         strain_id = sequences
         for gene in gene_region:
-            coordinates = input_data[sequences][gene].split("|")
+            coordinates = input_data[strain_id][gene].split("|")
             temp_seq = ""
-            span = 0.0
+            coverage = 0.0
             if len(coordinates) == 2:
                 begin = int(coordinates[0])
                 end = int(coordinates[1])
-                temp_seq = input_data[sequences]["sequence"][begin-1:end-1]
+                temp_seq = input_data[strain_id]["sequence"][begin-1:end-1]
                 length = end-begin
             if len(coordinates) == 4:
                 begin = [int(coordinates[0]),int(coordinates[2])]
                 end = [int(coordinates[1]),int(coordinates[3])]
-                temp_seq = input_data[sequences]["sequence"][begin[0]-1:end[0]-1] + input_data[sequences]["sequence"][begin[1]-1:end[1]-1]
+                temp_seq = input_data[strain_id]["sequence"][begin[0]-1:end[0]-1] + input_data[strain_id]["sequence"][begin[1]-1:end[1]-1]
                 length = (end[0] + end[1]) - (begin[0] + begin[1])
             temp_seq = temp_seq.replace("N","-")
             if strip_gap:
                 temp_seq = temp_seq.replace("-","")            
-            span = round(float(len(temp_seq))/length,2)
-            if span < filter_span:
+            coverage = round(float(len(temp_seq))/length,2)
+            if len(temp_seq) < filter_span:
                 log_handle.write(strain_id + " " + gene + " gene region sequence length is shorter than the minimum required span length "
                 + str(filter_span) + " and therefore filtered out.\n")
+                continue
+            else:
+                output_dic[gene][strain_id] = temp_seq                
+            if coverage < filter_coverage:
+                log_handle.write(strain_id + " " + gene + " gene region sequence base ration less than the minimum required coverage "
+                + str(filter_coverage) + " and therefore filtered out.\n")
                 continue
             else:
                 output_dic[gene][strain_id] = temp_seq
