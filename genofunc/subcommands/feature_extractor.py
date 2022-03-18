@@ -11,6 +11,7 @@ def run(options):
         options.in_annotation,
         options.gene_region,
         options.strip_gap,
+        options.filter_coverage,
         options.filter_span,
         options.out_prefix,
         options.log_file
