@@ -125,7 +125,7 @@ Description: Extract gene(s) sequences from annotated json file based on user in
         --filter-span: Minimum gene sequence length to be filtered (Default: 0)
         --out-prefix: Output prefix for output sequences (Default: extracted_)
 
-    e.g. genofunc feature_extractor --annotated-file tests/data/sequences/annotated.json --gene pol gag --strip-gap --filter-span 0.9 --out-prefix tests/data/output/extracted_ 
+    e.g. genofunc feature_extractor --annotated-file tests/data/sequences/annotated.json --gene pol gag --strip-gap --filter-span 1300 --filter-coverage 0.7 --out-prefix tests/data/output/extracted_ 
 
 #### genome_annotator
 
