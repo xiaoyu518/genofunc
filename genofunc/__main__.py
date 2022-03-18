@@ -113,8 +113,12 @@ def main(args=None):
         help='Strip gap bases within extracted gene regions.'
     )
     subparser_feature_extractor.add_argument(
-        '--filter-span', dest='filter_span', type=float, metavar='<float>', required=False, default=0,
+        '--filter-span', dest='filter_span', type=int, metavar='<integer>', required=False, default=0,
         help='Minimum gene sequence length to be filtered (Default: 0)'
+    )
+    subparser_feature_extractor.add_argument(
+        '--filter-coverage', dest='filter_coverage', type=float, metavar='<float>', required=False, default=0.0,
+        help='Minimum gene Non Ambiguious base ratio to sequence length to be filtered (Default: 0.0)'
     )
     subparser_feature_extractor.add_argument(
         '--out-prefix', dest='out_prefix', metavar='<filename>', required=False, default="extracted_",
