@@ -120,8 +120,12 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
                 location_dic[i["accession"]][genes["featureId"]] = "|".join(temp_list)
 
     for record in SeqIO.parse(raw_fasta, "fasta"):
-        id = record.id[:record.id.find("|")]
-        reference_strain = record.id.split(".")[-1]
+        temp_list = record.id.split("|")
+        id = temp_list[0]
+        if record.id.find(".") > -1:
+            reference_strain = record.id.split(".")[-1]
+        else:
+            reference_strain = temp_list[-1]
         cigarResults = parasail.sg_trace_striped_32(str(sequence_dic[reference_strain]), str(record.seq), 10, 1, user_matrix)
         reference_dic[id] = {}
         reference_dic[id]["sequence"] = cigarResults.traceback.ref
