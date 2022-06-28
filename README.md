@@ -3,14 +3,14 @@
 A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installtion can be done by pulling the genofunc folder and running python setup.py install or pip install genofunc.
 
 
-### Fasta and/or Metadata Manipulation
+### FASTA and/or Metadata Manipulation
 
-Mini tools for manipulation of fasta and/or metadata files. Contains functions such as merging multiple fasta files and metadata files, filtering duplicates, encoding fasta file sequence IDs etc.
+Mini tools for manipulation of FASTA and/or metadata files. Contains functions such as merging multiple FASTA files and metadata files, filtering duplicates, encoding FASTA file sequence IDs etc.
 
 
 #### concatenate_fasta
 
-Description: Concatenate all fasta file with the same gene regions into one sequence fasta file. 
+Description: Concatenate all FASTA file with the same gene regions into one sequence FASTA file. 
 
     Options:
         --in-prefix: Input prefix within a directory for specific fasta files to be read (Required)
@@ -22,7 +22,7 @@ Description: Concatenate all fasta file with the same gene regions into one sequ
 
 #### extract_metadata
 
-Description: Extract relevent metadata based on index fields from metadata file using fasta files. If field is empty, it will not be extracted and flagged in log file.
+Description: Extract relevent metadata based on index fields from metadata file using FASTA files. If field is empty, it will not be extracted and flagged in log file.
 
     Options:
         --in-fasta: Input fasta file (Required)
@@ -38,7 +38,7 @@ Description: Extract relevent metadata based on index fields from metadata file 
 
 #### filter_fasta
 
-Description: Filter fasta file based on minimum sequence length.
+Description: Filter FASTA file based on minimum sequence length.
 
     Options:
         --in-dir: Input directory (Required)
@@ -52,7 +52,7 @@ Description: Filter fasta file based on minimum sequence length.
 
 #### gene_concatenator
 
-Description: Concatenate fasta file based on similar sequence names of multiple genomic regions. 
+Description: Concatenate FASTA file based on similar sequence names of multiple genomic regions. 
 
     Options:
         --in-fasta: Multiple fasta files for concatenation (Required)
@@ -62,7 +62,7 @@ Description: Concatenate fasta file based on similar sequence names of multiple 
 
 #### merge
 
-Description: Merges two or more fasta files avoiding duplicates based on matches to metadata
+Description: Merges two or more FASTA files avoiding duplicates based on matches to metadata
 
     Options:
         --in-fasta: List of fasta files with spaces in between. At least two fasta files must be inserted here. (Required)
@@ -86,7 +86,7 @@ Description: Split the sequence name into metadata based on piping character.
 
 #### rename_fasta
 
-Description: Renaming fasta sequence names based on character splits.
+Description: Renaming FASTA sequence names based on character splits.
 
     Options:
         --in-fasta: Input fasta file (Required)
@@ -151,7 +151,7 @@ Description: Map sequence to the closest reference sequence list based on mini-m
 
 #### group_align
 
-Description: Split the fasta file into groups of sequences set by a user threshold and align them in groups against reference. post group aligned sequences will be concatenated into a single alignment. 
+Description: Split the FASTA file into groups of sequences set by a user threshold and align them in groups against reference. post group aligned sequences will be concatenated into a single alignment. 
 
     Options:
         --in-dir: Input directory (Required)
