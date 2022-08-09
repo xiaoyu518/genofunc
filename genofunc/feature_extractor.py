@@ -51,13 +51,13 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_coverage,filter
             if len(coordinates) == 2:
                 begin = int(coordinates[0])
                 end = int(coordinates[1])
-                temp_seq = input_data[strain_id]["sequence"][begin-1:end-1]
-                length = end-begin
+                temp_seq = input_data[strain_id]["sequence"][begin-1:end]
+                length = end-begin+1
             if len(coordinates) == 4:
                 begin = [int(coordinates[0]),int(coordinates[2])]
                 end = [int(coordinates[1]),int(coordinates[3])]
-                temp_seq = input_data[strain_id]["sequence"][begin[0]-1:end[0]-1] + input_data[strain_id]["sequence"][begin[1]-1:end[1]-1]
-                length = (end[0] + end[1]) - (begin[0] + begin[1])
+                temp_seq = input_data[strain_id]["sequence"][begin[0]-1:end[0]] + input_data[strain_id]["sequence"][begin[1]-1:end[1]]
+                length = (end[0] + end[1]) - (begin[0] + begin[1]) + 2
             temp_seq = temp_seq.replace("N","-")
             if strip_gap:
                 temp_seq = temp_seq.replace("-","")            
