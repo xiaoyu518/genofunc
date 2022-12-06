@@ -13,6 +13,7 @@ Options:
     :param out_dir: Output folder directory (Default: ./)
 
 This file is part of PANGEA HIV project (www.pangea-hiv.org).
+This program uses the original augur package for its alignment functionality.
 Copyright 2020 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk).
 """
 
