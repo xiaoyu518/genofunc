@@ -129,7 +129,7 @@ Description: Extract gene(s) sequences from annotated json file based on user in
 
 #### genome_annotator
 
-Description: Annotate genomes based on closest reference sequence annotation. 
+Description: Annotate genomes based on closest reference sequence annotation.
 
     Options:
         --raw-fasta: Raw sequences with reference in name tag in fasta format (Required)
@@ -140,7 +140,7 @@ Description: Annotate genomes based on closest reference sequence annotation.
 
 #### reference_matcher
 
-Description: Map sequence to the closest reference sequence list based on mini-map2. 
+Description: Map sequence to the closest reference sequence list based on mini-map2. Note: Program uses piping convention for indicating references. Dont use | within any reference or sequence names.
 
     Options:
         --in-fasta: Raw sequences needed to be referenced to reference list in fasta format (Required)
