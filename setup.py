@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="genofunc",
-    version="1.0.3",
+    version="1.0.2",
     packages=find_packages(),
     url="https://github.com/xiaoyu518/genofunc",
     license="MIT",
