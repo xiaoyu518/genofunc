@@ -3,7 +3,7 @@
 """
 Name: genome_annotator.py
 Author: Xiaoyu Yu
-Date: 01 April 2022
+Date: 10 April 2023
 Description: Annotate genomes based on closest reference sequence annotation. 
 
 Options:
