@@ -2,10 +2,10 @@
 
 A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installtion can be done by pulling the genofunc folder and running python setup.py install or pip install genofunc.
 
-### Changelog(v1.0.2)
+### Changelog(v1.0.4)
 
     > Added function to annotated DNA viruses which contains "complement" under annotation tab within GenBank. This is treated as a "-" sign within the reference/annotation file gene coordinate and read as a "complement" when extracted using feature_extractor. 
-    > Minor coding changes.
+    > Minor bug fixes.
 
 ### FASTA and/or Metadata Manipulation
 
