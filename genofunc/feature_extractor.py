@@ -49,15 +49,27 @@ def feature_extractor(in_annotation,gene_region,strip_gap,filter_coverage,filter
             temp_seq = ""
             coverage = 0.0
             if len(coordinates) == 2:
-                begin = int(coordinates[0]) - 1
-                end = int(coordinates[1])
-                temp_seq = input_data[strain_id]["sequence"][begin:end]
+                begin = abs(int(coordinates[0])) - 1
+                end = abs(int(coordinates[1]))
+                if int(coordinates[0]) < 0:
+                    temp_seq = str(Seq(input_data[strain_id]["sequence"][begin:end]).complement())
+                else:
+                    temp_seq = input_data[strain_id]["sequence"][begin:end]
                 length = end-begin
-            if len(coordinates) == 4:
-                begin = [int(coordinates[0]) - 1,int(coordinates[2]) - 1]
-                end = [int(coordinates[1]),int(coordinates[3])]
-                temp_seq = input_data[strain_id]["sequence"][begin[0]:end[0]] + input_data[strain_id]["sequence"][begin[1]:end[1]]
-                length = (end[0] + end[1]) - (begin[0] + begin[1])
+            elif len(coordinates) > 2:
+                temp_seq = ""
+                length = 0
+                for i in range(0,len(coordinates),2):
+                    begin = abs(int(coordinates[i])) - 1
+                    end = abs(int(coordinates[i+1]))
+                    temp_seq += input_data[strain_id]["sequence"][begin:end]
+                    length += end-begin
+                if int(coordinates[0]) < 0:
+                    temp_seq = str(Seq(temp_seq).complement())                
+            else:
+                print("Sequence " + strain_id + " with gene " + gene + " does not contain valid gene coordinate for extraction. Program Exiting.")
+                sys.exit()
+                
             temp_seq = temp_seq.replace("N","-")
             if strip_gap:
                 temp_seq = temp_seq.replace("-","")            
