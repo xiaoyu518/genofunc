@@ -135,7 +135,8 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
                 coordinates = location_dic[reference_strain][genes].split("|")
                 for i in range(len(coordinates)):
                     counter = 0
-                    gene_coordinate = int(coordinates[i])
+                    temp_value = int(coordinates[i])
+                    gene_coordinate = abs(int(coordinates[i]))
                     for j in query_cigar_dic["deletion"]:
                         deletion_base = int(j[0])
                         if deletion_base <= gene_coordinate:
@@ -143,6 +144,10 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
                         else:
                             break
                     coordinates[i] = str(gene_coordinate + counter)
+                    if temp_value < 0:
+                        coordinates[i] = str((gene_coordinate + counter)*(-1))
+                    else:
+                        coordinates[i] = str(gene_coordinate + counter)
                 reference_dic[id][genes] = "|".join(coordinates)
 
     with open(annotated_json, 'w') as f:
