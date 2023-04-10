@@ -3,7 +3,7 @@
 """
 Name: feature_extractor.py
 Author: Xiaoyu Yu
-Date: 01 April 2022
+Date: 10 April 2023
 Description: Extract gene(s) sequences from annotated json file based on user input gene regions.
 
 Options:
