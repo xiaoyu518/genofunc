@@ -10,6 +10,8 @@ def run(options):
     reference_matcher(
         options.in_fasta,
         options.reference_sequence,
+        options.virus_type,
+        options.percentage_match,
         options.out_fasta,
         options.log_file
     )
