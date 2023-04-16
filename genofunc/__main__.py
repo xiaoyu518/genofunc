@@ -303,6 +303,14 @@ def main(args=None):
         help='Reference list in fasta format'
     )
     subparser_reference_matcher.add_argument(
+        '--virus-type', dest='virus_type', default="RNA", metavar='<string>', required=False,
+        help='Specify if the input sequences are DNA or RNA virus type. (Default: RNA)'
+    )
+    subparser_reference_matcher.add_argument(
+        '--percentage-match', dest='percentage_match', default=0.1, metavar='<float>', required=False,
+        help='Match to reference based on percentage of nucleotide base matches by percentage (Default: 0.1)'
+    )
+    subparser_reference_matcher.add_argument(
         '--out-fasta', dest='out_fasta', default="referenced.fasta", metavar='<filename>', required=False,
         help='Output list of referenced sequences (Default:referenced.fasta)'
     )
