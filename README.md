@@ -4,6 +4,8 @@ A compiled tool for HIV sequence processing including referencing, annotation, f
 
 ### Changelog(v1.1)
 
+    > Added options "virus-type" to reference_matcher to deal with DNA virus type which raw sequences may not be on the forward strand. 
+    > Added options "percentage-match" to reference_matcher to filter out raw sequences which do not match to reference based on a certain threshold. e.g. the default value 0.1 implies only a match of 90% to a certain reference will be passed out to the output file.
     > Added function to annotated DNA viruses which contains "complement" under annotation tab within GenBank. This is treated as a "-" sign within the reference/annotation file gene coordinate and read as a "reverse complement" when extracted using feature_extractor. 
     > Minor bug fixes.
 
@@ -149,6 +151,8 @@ Description: Map sequence to the closest reference sequence list based on mini-m
     Options:
         --in-fasta: Raw sequences needed to be referenced to reference list in fasta format (Required)
         --reference-sequence: Reference list in fasta format (Required)
+        --virus-type: Specify if the input sequences are DNA or RNA virus type. (Default: RNA)
+        --percentage-match: Match to reference based on percentage of nucleotide base matches by percentage (Default: 0.1)
         --out-fasta: Output list of sequences referenced (Default: referenced.fasta)
 
     e.g. genofunc reference_matcher --in-fasta tests/data/sequences/seqA.fasta --reference-sequence tests/data/reference/reference.fasta --out-fasta tests/data/output/referenced.fasta
