@@ -52,6 +52,9 @@ def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
                     start_ref = hit.r_st
                     end_ref = hit.r_en
                     cigar_array = hit.cigar
+                new_id = "|".join([record.id,str(matching_length),reference_id])
+                new_record = SeqRecord(record.seq,new_id,description="")
+                log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,matching_length,mismatches,start_ref,end_ref,cigar_array))
                 if matching_length < mismatches:
                     temp_seq = record.seq.reverse_complement()
                     for hit in reference_list.map(temp_seq):
@@ -62,15 +65,11 @@ def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
                             reverse_start_ref = hit.r_st
                             reverse_end_ref = hit.r_en
                             reverse_cigar_array = hit.cigar
-                if reverse_matching_length > matching_length:
-                    new_id = "|".join([record.id,str(reverse_matching_length),reverse_reference_id])
-                    new_record = SeqRecord(temp_seq,new_id,description="")
-                    log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,reverse_matching_length,reverse_mismatches,reverse_start_ref,
-                                                                           reverse_end_ref,reverse_cigar_array))
-                else:
-                    new_id = "|".join([record.id,str(matching_length),reference_id])
-                    new_record = SeqRecord(record.seq,new_id,description="")
-                    log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,matching_length,mismatches,start_ref,end_ref,cigar_array))
+                    if reverse_matching_length > matching_length:
+                        new_id = "|".join([record.id,str(reverse_matching_length),reverse_reference_id])
+                        new_record = SeqRecord(temp_seq,new_id,description="")
+                        log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,reverse_matching_length,reverse_mismatches,reverse_start_ref,
+                                                                            reverse_end_ref,reverse_cigar_array))                       
             if matching_length != 0 or reverse_matching_length != 0:
                 SeqIO.write(new_record, outfile, "fasta-2line")
             
