@@ -42,6 +42,7 @@ def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
 
     for record in SeqIO.parse(in_fasta, "fasta"):
         matching_length = 0
+        reverse_matching_length = 0
         mismatches = round(float(percentage_match)*len(str(record.seq)),0)
         if virus_type.upper() == "DNA":
             for hit in reference_list.map(record.seq):
