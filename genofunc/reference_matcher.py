@@ -44,7 +44,7 @@ def reference_matcher(in_fasta,reference_sequence,virus_type,percentage_match,ou
         reverse_matching_length = 0
         mismatches = round(float(percentage_match)*len(str(record.seq)),0)
         if virus_type.upper() == "DNA":
-            for hit in reference_list.map(record.seq):
+            for hit in reference_list.map(str(record.seq)):
                 if hit.mlen >= matching_length and hit.NM <= mismatches:
                     matching_length = hit.mlen
                     mismatches = hit.NM
@@ -57,7 +57,7 @@ def reference_matcher(in_fasta,reference_sequence,virus_type,percentage_match,ou
                 log_handle.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(record.id,hit.ctg,matching_length,mismatches,start_ref,end_ref,cigar_array))
                 if matching_length < mismatches:
                     temp_seq = record.seq.reverse_complement()
-                    for hit in reference_list.map(temp_seq):
+                    for hit in reference_list.map(str(temp_seq)):
                         if hit.mlen >= matching_length and hit.NM <= mismatches:
                             reverse_matching_length = hit.mlen
                             reverse_mismatches = hit.NM
@@ -74,7 +74,7 @@ def reference_matcher(in_fasta,reference_sequence,virus_type,percentage_match,ou
                 SeqIO.write(new_record, outfile, "fasta-2line")
             
         elif virus_type.upper() == "RNA":
-            for hit in reference_list.map(record.seq):
+            for hit in reference_list.map(str(record.seq)):
                 if hit.mlen >= matching_length and hit.NM <= mismatches:
                     matching_length = hit.mlen
                     mismatches = hit.NM
