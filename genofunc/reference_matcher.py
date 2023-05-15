@@ -20,11 +20,10 @@ from Bio import SeqIO
 import sys
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
-from Bio.Seq import Seq
 import datetime as dt
 from genofunc.utils import *
 
-def reference_matcher(in_fasta,reference_sequence,out_fasta,log_file):
+def reference_matcher(in_fasta,reference_sequence,virus_type,percentage_match,out_fasta,log_file):
     time_start = dt.datetime.now()
 
     if not file_check(in_fasta):
