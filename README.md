@@ -1,6 +1,6 @@
 # genofunc
 
-A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installtion can be done by pulling the genofunc folder and running python setup.py install or pip install genofunc.
+A compiled tool for HIV sequence processing including referencing, annotation, feature extraction, filtering and merging. Installation can be done by pulling the genofunc folder and running python setup.py install or pip install genofunc.
 
 ### Changelog
 
