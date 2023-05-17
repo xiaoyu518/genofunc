@@ -6,6 +6,7 @@ A compiled tool for HIV sequence processing including referencing, annotation, f
 
     v1.1.1
         > minor bugfixes (reference_matcher)
+        > Note: Due to the current version may experience lack of memory issue for longer sequences (>50kb), it is adviced not to be used for large datasets of such sequence length until newer updates.
 
     v1.1
         > Added options "virus-type" to reference_matcher to deal with DNA virus type which raw sequences may not be on the forward strand. 
