@@ -4,7 +4,6 @@ Copyright 2022 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk) & Rachel Colquhoun (rachel.colquho
 """
 
 import argparse
-
 import genofunc
 import genofunc.subcommands
 
@@ -196,6 +195,10 @@ def main(args=None):
     subparser_genome_annotator.add_argument(
         '--reference-sequence', dest='reference_sequence', metavar='<filename>', required=True,
         help='Annotated reference sequences in json format'
+    )
+    subparser_genome_annotator.add_argument(
+        '--threads', dest='threads', metavar='<integer>', required=False, default=1,
+        help='Number of threads for multiprocessing (Default: 1)'
     )
     subparser_genome_annotator.add_argument(
         '--out-annotation', dest='out_annotation', metavar='<filename>', required=False, default="referenced.json",
