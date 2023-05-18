@@ -145,6 +145,7 @@ Description: Annotate genomes based on closest reference sequence annotation.
     Options:
         --raw-fasta: Raw sequences with reference in name tag in fasta format (Required)
         --reference-sequence: Annotated reference sequences in json format (Required)
+        --threads: Set number of threads for multiprocessing (Default: 1)
         --out-annotation: Output list of sequences annotated in json format (Default: referenced.json)
 
     e.g. genofunc genome_annotator --raw-fasta tests/data/sequences/referenced.fasta --reference-sequence tests/data/reference/reference.json --out-annotation tests/data/output/annotated.json
