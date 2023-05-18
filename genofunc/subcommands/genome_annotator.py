@@ -10,6 +10,7 @@ def run(options):
     genome_annotator(
         options.raw_fasta,
         options.reference_sequence,
+        options.threads,
         options.out_annotation,
         options.log_file
     )
