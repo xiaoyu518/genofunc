@@ -6,6 +6,7 @@ A compiled tool for HIV sequence processing including referencing, annotation, f
 
     v1.1.2
         > Multiprocessing added to genome_annotator function for improving run-time. --threads option added to this function.
+        
     v1.1.1
         > minor bugfixes (reference_matcher)
         > Note: Due to the current version may experience lack of memory issue for longer sequences (>50kb), it is adviced not to be used for large datasets of such sequence length until newer updates.
