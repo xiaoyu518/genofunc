@@ -3,12 +3,13 @@
 """
 Name: genome_annotator.py
 Author: Xiaoyu Yu
-Date: 10 April 2023
+Date: 18 May 2023
 Description: Annotate genomes based on closest reference sequence annotation. 
 
 Options:
     :param raw_fasta: Raw sequences with reference in name tag in fasta format (Required)
     :param reference_sequence: Annotated reference sequences in json format (Required)
+    :param threads: Number of threads for multiprocessing (Default: 1)
     :param annotated_json: Output list of sequences annotated in json format (Default: referenced.json)
 
 This file is part of PANGEA HIV project (www.pangea-hiv.org).
@@ -18,7 +19,6 @@ Copyright 2021 Xiaoyu Yu (xiaoyu.yu@ed.ac.uk).
 import json
 import sys
 import parasail
-import re
 from Bio import SeqIO
 import datetime as dt
 from genofunc.utils import *
@@ -32,6 +32,7 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
             else:
                 break
         return int(temp_string)
+    
     def createCigarDic(cigar):
         base_position = 1
         cigar_pos = 0
@@ -54,12 +55,12 @@ def genome_annotator(raw_fasta,reference_sequence,annotated_json,log_file):
             cigar_pos += 1
         return cigar_dic
 
-
     time_start = dt.datetime.now()
     location_dic = {}
     reference_dic = {}
     sequence_dic = {}
     features = []
+    processing_list = []
 
     user_matrix = parasail.matrix_create("ACGTRY?", 5, -4)
     user_matrix[0,2] = -1   #A-G
