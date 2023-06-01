@@ -16,6 +16,8 @@ A compiled tool for HIV sequence processing including referencing, annotation, f
         > Added options "percentage-match" to reference_matcher to filter out raw sequences which do not match to reference based on a certain threshold. e.g. the default value 0.1 implies only a match of 90% to a certain reference will be passed out to the output file.
         > Added function to annotated DNA viruses which contains "complement" under annotation tab within GenBank. This is treated as a "-" sign within the reference/annotation file gene coordinate and read as a "reverse complement" when extracted using feature_extractor. 
         > Minor bug fixes.
+    
+    Note: Genofunc was extensively tested on the Darwin OS and may experience problems with other OS. Please issue any bugs encountered and will be attended to ASAP.
 
 ### FASTA and/or Metadata Manipulation
 
