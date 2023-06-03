@@ -4,6 +4,8 @@ A compiled tool for HIV sequence processing including referencing, annotation, f
 
 ### Changelog
 
+    v1.1.3
+        > Minor bugfix to strain_encoder with encoded metadata header not in correct format.
     v1.1.2
         > Multiprocessing added to genome_annotator function for improving run-time. --threads option added to this function.
         
