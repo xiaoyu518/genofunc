@@ -3,7 +3,7 @@
 """
 Name: strain_encoder.py
 Author: Xiaoyu Yu
-Date: 01 April 2022
+Date: 03 June 2023
 Description: Encoded strain id into non-defining ids. 
 
 Options:
@@ -34,8 +34,6 @@ def strain_encoder(in_fasta,in_metadata,encoding_column,out_dir,log_file):
         print("Metadata file does not exist. Please enter a new file path. Program Exiting")
         sys.exit()
 
-
-    output_metadata = open(out_dir+"encoded_metadata.csv","w")
     log_handle = get_log_handle(log_file)
     column_dic = {}
     encoding_dic = {}
@@ -44,6 +42,7 @@ def strain_encoder(in_fasta,in_metadata,encoding_column,out_dir,log_file):
         seperator = ','
         if in_metadata.endswith('tsv'):
             seperator = '\t'
+        header = f.readline().split(seperator)
         for line in f:
             rows = line.rstrip().split(seperator)
             if rows[encoding_column] not in column_dic.keys():
@@ -66,16 +65,12 @@ def strain_encoder(in_fasta,in_metadata,encoding_column,out_dir,log_file):
             SeqIO.write(new_record, output_sequence, "fasta-2line")
         output_sequence.close() 
 
+    output_metadata = open(out_dir+"encoded_metadata.csv","w")
     with open(in_metadata,"r") as f:
-        seperator = ','
-        if in_metadata.endswith('tsv'):
-            seperator = '\t'
         for line in f:
             rows = line.rstrip().split(seperator)
-            if rows[0] == "strain":
-                output_metadata.write(line)
-                continue
-            rows[0] = encoding_dic[rows[0]]
+            if rows[0] != header[0]:
+                rows[0] = encoding_dic[rows[0]]
             output_metadata.write(",".join(rows)+"\n")
 
     close_handle(output_metadata)
